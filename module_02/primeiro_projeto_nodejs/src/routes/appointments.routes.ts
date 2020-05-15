@@ -9,7 +9,7 @@ appointmentsRouter.post('/', (request, response) => {
   const { provider, date } = request.body;
 
   const appointment = {
-    id: uuid(),
+    id: uuid(), // generate uuid for provider
     provider,
     date,
   };
