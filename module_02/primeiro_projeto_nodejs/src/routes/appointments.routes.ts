@@ -1,36 +1,36 @@
 import { Router } from 'express';
-import { startOfHour, parseISO, isEqual } from 'date-fns';
-import Appointment from '../models/Appointment';
+import { parseISO } from 'date-fns';
+
+import AppointmentsRepository from '../Repository/AppointmentsRepository';
+import CreateAppointmentService from '../services/CreateAppointmentService';
 
 const appointmentsRouter = Router();
-
-const appointments: Appointment[] = [];
+const appointmentsRepository = new AppointmentsRepository();
 
 appointmentsRouter.get('/', (request, response) => {
-  return response.json(appointments);
+  return response.json(appointmentsRepository.all());
 });
 
 appointmentsRouter.post('/', (request, response) => {
-  const { provider, date } = request.body;
+  try {
+    const { provider, date } = request.body;
 
-  const parsedDate = startOfHour(parseISO(date));
+    const parsedDate = parseISO(date);
 
-  // Verifica se ha aglum agendamento na data especifica
-  const findAppointmentInSameDate = appointments.find(appointment =>
-    isEqual(parsedDate, appointment.date),
-  );
+    const createAppointment = new CreateAppointmentService(
+      appointmentsRepository,
+    );
 
-  if (findAppointmentInSameDate) {
-    return response
-      .status(400)
-      .json({ msg: 'This appointment is already booked' });
+    const appointment = createAppointment.execute({
+      provider,
+      date: parsedDate,
+    });
+    return response.json(appointment);
+    // se houver algum erro no execute(retornado pelo throw) ele executara nesse catch
+    // a mensagem vem daquela digitada no Error do services
+  } catch (err) {
+    return response.status(400).json({ error: err.message });
   }
-
-  const appointment = new Appointment(provider, parsedDate);
-
-  appointments.push(appointment);
-
-  return response.json(appointment);
 });
 
 export default appointmentsRouter;
