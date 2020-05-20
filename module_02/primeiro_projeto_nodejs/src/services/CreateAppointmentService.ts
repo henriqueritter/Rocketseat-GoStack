@@ -1,7 +1,7 @@
 import { startOfHour } from 'date-fns';
 import Appointment from '../models/Appointment';
 
-import AppointmentsRepository from '../Repository/AppointmentsRepository';
+import AppointmentsRepository from '../repository/AppointmentsRepository';
 
 // DTO do Appointment
 interface RequestAppointment {
