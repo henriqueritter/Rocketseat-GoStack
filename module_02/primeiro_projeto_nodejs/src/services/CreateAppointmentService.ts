@@ -7,13 +7,13 @@ import AppointmentsRepository from '../repository/AppointmentsRepository';
 
 // DTO do Appointment
 interface RequestAppointment {
-  provider: string;
+  provider_id: string;
   date: Date;
 }
 
 class CreateAppointmentService {
   public async execute({
-    provider,
+    provider_id,
     date,
   }: RequestAppointment): Promise<Appointment> {
     const appointmentsRepository = getCustomRepository(AppointmentsRepository);
@@ -29,7 +29,7 @@ class CreateAppointmentService {
     }
 
     const appointment = appointmentsRepository.create({
-      provider,
+      provider_id,
       date: appointmentDate,
     });
 

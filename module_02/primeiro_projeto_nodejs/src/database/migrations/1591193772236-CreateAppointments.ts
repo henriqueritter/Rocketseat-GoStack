@@ -9,7 +9,7 @@ export default class CreateAppointments1591193772236
         columns: [
           {
             name: 'id',
-            type: 'varchar',
+            type: 'uuid',
             isPrimary: true,
             generationStrategy: 'uuid',
             default: 'uuid_generate_v4()',
@@ -27,10 +27,12 @@ export default class CreateAppointments1591193772236
           {
             name: 'created_at',
             type: 'timestamp with time zone',
+            default: 'now()',
           },
           {
             name: 'updated_at',
             type: 'timestamp with time zone',
+            default: 'now()',
           },
         ],
       }),
