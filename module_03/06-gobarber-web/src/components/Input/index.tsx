@@ -8,8 +8,6 @@ import React, {
 import { Container, Error } from './styles';
 import { useField } from '@unform/core';
 
-import Tooltip from '../Tooltip';
-
 import { IconBaseProps } from 'react-icons';
 import { FiAlertCircle } from 'react-icons/fi';
 
