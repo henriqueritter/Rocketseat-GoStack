@@ -6,7 +6,6 @@ import CreateUserService from '../services/CreateUserService';
 import UpdateUserAvatarService from '../services/UpdateUserAvatarService';
 
 import ensureAuthenticated from '../middlewares/ensureAuthenticated';
-import AddAvatarFieldToUsers1592348448462 from '../database/migrations/1592348448462-AddAvatarFieldToUsers';
 
 const usersRouter = Router();
 const upload = multer(uploadConfig);
