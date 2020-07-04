@@ -12,6 +12,7 @@ import { Container } from './styles';
 import { ToastMessage, useToast } from '../../../hooks/toast';
 interface ToastProps {
   message: ToastMessage;
+  style: object;
 }
 
 const icons = {
@@ -20,7 +21,7 @@ const icons = {
   success: <FiCheckCircle size={24} />,
 };
 
-const Toast: React.FC<ToastProps> = ({ message }) => {
+const Toast: React.FC<ToastProps> = ({ message, style }) => {
   const { removeToast } = useToast();
 
   //Executa sempre que um toast é criado, é utilizado para fechar ele automaticamente
@@ -39,6 +40,7 @@ const Toast: React.FC<ToastProps> = ({ message }) => {
     <Container
       type={message.type}
       hasDescription={!!message.description} //Transforma o message description em boolean
+      style={style}
     >
       {/* Exibe os icones com base na interface criada */}
       {icons[message.type || 'info']}
