@@ -1,17 +1,22 @@
 import React from 'react';
+//Importado para adicionar as rotas
+import { BrowserRouter } from 'react-router-dom';
 import GlobalStyle from './styles/global';
 
-import SignIn from './pages/SignIn';
-// import SignUp from './pages/SignUp';
 import AppProvider from './hooks';
+
+//Importado
+import Routes from './routes';
 
 const App: React.FC = () => (
   <>
-    <AppProvider>
-      <SignIn />
-    </AppProvider>
+    <BrowserRouter>
+      <AppProvider>
+        <Routes />
+      </AppProvider>
 
-    <GlobalStyle />
+      <GlobalStyle />
+    </BrowserRouter>
   </>
 );
 
