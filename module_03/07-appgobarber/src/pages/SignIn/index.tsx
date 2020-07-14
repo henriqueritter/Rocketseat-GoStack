@@ -20,6 +20,8 @@ import Input from '../../components/Input';
 import Button from '../../components/Button';
 import logoImg from '../../assets/logo.png';
 
+import { useAuth } from '../../hooks/auth';
+
 import {
   Container,
   Title,
@@ -38,6 +40,7 @@ const SignIn: React.FC = () => {
   const navigation = useNavigation();
   const formRef = useRef<FormHandles>(null);
   const passwordInputRef = useRef<TextInput>(null);
+  const { signIn, user } = useAuth();
 
   const handleSignIn = useCallback(async (data: SignInFormData) => {
     try {
@@ -52,12 +55,10 @@ const SignIn: React.FC = () => {
       });
       await schema.validate(data, { abortEarly: false });
 
-      // await signIn({
-      //   email: data.email,
-      //   password: data.password,
-      // });
-
-      // history.push('/dashboard');
+      await signIn({
+        email: data.email,
+        password: data.password,
+      });
     } catch (err) {
       // verifica se o err vem da validacao Yup
       if (err instanceof Yup.ValidationError) {
