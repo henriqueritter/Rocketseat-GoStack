@@ -51,7 +51,6 @@ const Input: React.RefForwardingComponent<InputRef, InputProps> = (
   useImperativeHandle(ref, () => ({
     focus() {
       inputElementRef.current.focus();
-      console.log('asd');
     },
   }));
   useEffect(() => {
