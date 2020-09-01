@@ -118,6 +118,8 @@ const CreateAppointment: React.FC = () => {
   }, []);
 
   const handleCreateAppointment = useCallback(async () => {
+    // TODO
+    // Fazer uma verificao se ele nao selecionou nenhuma hora
     try {
       const date = new Date(selectedDate);
 
